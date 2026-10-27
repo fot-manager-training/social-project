@@ -56,3 +56,14 @@ jobs:
       - name: Deploy site
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published site
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          site_base="${SITE_URL%/}"
+          curl --fail --location --retry 6 --retry-all-errors --retry-delay 5 --max-time 30 "$site_base/" -o /tmp/published-index.html
+          grep -q '<title>Сопутник' /tmp/published-index.html
+          for asset in app.js style.css favicon.svg; do
+            curl --fail --location --retry 3 --retry-all-errors --retry-delay 3 --max-time 30 "$site_base/$asset" -o "/tmp/published-$asset"
+            cmp "$asset" "/tmp/published-$asset"
+          done

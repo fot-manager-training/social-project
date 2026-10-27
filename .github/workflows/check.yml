@@ -1,5 +1,9 @@
 name: Browser checks
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -20,3 +24,35 @@ jobs:
             sleep 1
           done
           npm test
+
+  publish:
+    name: Publish to GitHub Pages
+    needs: smoke
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+      - name: Prepare public files
+        run: |
+          mkdir -p _site
+          cp index.html app.js style.css favicon.svg _site/
+          touch _site/.nojekyll
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy site
+        id: deployment
+        uses: actions/deploy-pages@v4

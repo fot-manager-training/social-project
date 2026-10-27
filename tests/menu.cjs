@@ -1,0 +1,26 @@
+const assert = require('node:assert/strict');
+
+module.exports = async function checkMenu(page) {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.getByRole('button', { name: 'Свернуть меню', exact: true }).click();
+  assert.equal(await page.locator('main').evaluate(el => getComputedStyle(el).marginLeft), '80px');
+  assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'), 'false');
+  await page.reload();
+  await page.getByRole('button', { name: 'Развернуть меню', exact: true }).waitFor();
+  await page.locator('nav').getByRole('button', { name: 'Моя анкета', exact: true }).click();
+  await page.locator('[name="name"]').fill('Несохранённый текст');
+  await page.locator('#menu-toggle').focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.locator('[name="name"]').inputValue(), 'Несохранённый текст');
+  assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'), 'true');
+  await page.locator('#menu-toggle').click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await page.locator('#sidebar-nav').isVisible(), false);
+  await page.locator('#menu-toggle').click();
+  assert.equal(await page.locator('#sidebar-nav').isVisible(), true);
+  await page.locator('nav').getByRole('button', { name: 'Мой маршрут', exact: true }).click();
+  assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'), 'true');
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  console.log('PASS: menu collapse, saved preference, compact navigation, keyboard, unsaved form preservation, mobile toggle');
+};

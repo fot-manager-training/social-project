@@ -8,3 +8,29 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
 .arrow{display:inline-block;width:14px;height:14px;vertical-align:middle;flex-shrink:0}.hero .primary .arrow{width:17px;height:17px}.textbutton .arrow{width:11px;height:11px}.companylogo .arrow{width:20px;height:20px}.support .arrow{width:11px;height:11px}
+
+/* Persistent compact navigation; toggling preserves the current screen and forms. */
+.tagline{margin-bottom:23px}
+.menu-toggle{display:flex;align-items:center;gap:12px;width:100%;min-height:36px;padding:8px 14px;margin-bottom:16px;border:1px solid #ffffff1a;border-radius:8px;color:#b6c9ab;font-size:10px;text-align:left}
+.menu-toggle svg{width:18px;height:18px}
+.menu-toggle:hover{background:#ffffff0d;color:#e2edaa}
+.menu-toggle:focus-visible{outline-color:#e2edaa}
+@media(min-width:761px){
+  .menu-collapsed aside{width:80px;padding:34px 16px 24px;overflow:visible}
+  .menu-collapsed main{margin-left:80px}
+  .menu-collapsed .brand{justify-content:center;gap:0}
+  .menu-collapsed .brand svg{width:35px;height:35px}
+  .menu-collapsed .brand-name,.menu-collapsed .tagline,.menu-collapsed .nav-label,.menu-collapsed .toggle-label,.menu-collapsed .sidebottom{display:none}
+  .menu-collapsed .menu-toggle{justify-content:center;padding:8px;margin-top:24px;margin-bottom:20px}
+  .menu-collapsed .menu-toggle svg{transform:rotate(180deg)}
+  .menu-collapsed nav button{width:48px;min-height:46px;justify-content:center;padding:12px;gap:0}
+  .menu-collapsed nav button.active:after{display:none}
+}
+@media(max-width:760px){
+  .brand:after{display:none}
+  .menu-toggle{position:absolute;right:18px;top:17px;width:36px;min-height:36px;justify-content:center;padding:8px;margin:0}
+  .toggle-label{display:none}
+  .menu-collapsed #sidebar-nav{display:none}
+  .menu-collapsed aside{padding-bottom:19px}
+  .menu-collapsed .menu-toggle svg{transform:rotate(180deg)}
+}

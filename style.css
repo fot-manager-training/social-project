@@ -287,3 +287,18 @@ body:not(.is-home) .chat{max-height:440px;min-height:240px;padding:17px}
 @keyframes typing-pulse{0%,60%,100%{opacity:.4;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
 @media(max-width:760px){body:not(.is-home) .chat{min-height:220px;max-height:360px;padding:12px}.chat-typing{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.chat{scroll-behavior:auto}.message-in,.chat-typing,.typing-dots i{animation:none!important}}
+
+/* Gentle independent movement keeps the reference composition intact. */
+.is-home .club-art>.doodle,.is-home .club-art>.glass-card,.is-home .club-art>.start-sticker{transform-origin:center;animation:hero-float var(--float-duration,7s) ease-in-out infinite;animation-delay:var(--float-delay,0s)}
+.is-home .doodle-hash{--float-duration:7.8s;--float-delay:-2s;--float-x:3px;--float-y:-8px;--float-turn:5deg}
+.is-home .doodle-loop{--float-duration:6.8s;--float-delay:-3s;--float-x:4px;--float-y:7px;--float-turn:-5deg}
+.is-home .glass-route{--float-duration:7.4s;--float-delay:-1.6s;--float-x:-5px;--float-y:-12px;--float-turn:-3deg}
+.is-home .glass-team{--float-duration:8.4s;--float-delay:-4.2s;--float-x:5px;--float-y:-10px;--float-turn:3deg}
+.is-home .doodle-scribble{--float-duration:6.4s;--float-delay:-1s;--float-x:-3px;--float-y:-6px;--float-turn:5deg}
+.is-home .start-sticker{--float-duration:9s;--float-delay:-3.4s;--float-x:2px;--float-y:-7px;--float-turn:-6deg;padding:12px;gap:6px;overflow:hidden}
+.is-home .start-sticker>span{display:block;max-width:78%;font-size:clamp(5px,.5vw,7px);line-height:1.5;letter-spacing:.3px;text-align:center;white-space:nowrap;flex-shrink:0}
+.is-home .start-sticker svg{max-width:65%;height:auto;aspect-ratio:4/3;flex-shrink:1}
+.is-home .hero.motion-paused .club-art>*{animation-play-state:paused}
+@keyframes hero-float{0%,100%{translate:0 0;rotate:0deg}50%{translate:var(--float-x,0px) var(--float-y,-8px);rotate:var(--float-turn,3deg)}}
+@media(max-width:760px){.is-home .start-sticker{padding:10px;gap:5px}.is-home .club-art>*{--float-x:0px!important;--float-y:-5px!important;--float-turn:2deg!important}}
+@media(prefers-reduced-motion:reduce){.is-home .club-art>*{animation:none!important;translate:none!important;rotate:none!important}}

@@ -320,3 +320,39 @@ html:has(body.is-home){scroll-behavior:smooth}
 .feature-widget:nth-child(2){z-index:2}
 .feature-widget:nth-child(3){z-index:1}
 .widget-swoosh{overflow:visible}
+
+/* An editorial mosaic: wide feature cards paired with compact and tall notes. */
+body:not(.is-home) .resource-library{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:minmax(185px,auto);gap:20px;align-items:stretch}
+body:not(.is-home) .resource-library>.resource{grid-column:span 2;grid-row:span 1;min-width:0;position:relative;overflow:hidden;padding:25px;border-radius:27px}
+body:not(.is-home) .resource-library>.resource:nth-child(6n+1){grid-column:span 4;grid-row:span 2;background:#073dd1}
+body:not(.is-home) .resource-library>.resource:nth-child(6n+4){grid-column:span 2;grid-row:span 2;background:#e6edff}
+body:not(.is-home) .resource-library>.resource:nth-child(6n+5),body:not(.is-home) .resource-library>.resource:nth-child(6n+6){grid-column:span 4}
+body:not(.is-home) .resource-library>.resource:nth-child(6n+3){background:#baff00}
+body:not(.is-home) .resource-library .resource>summary{display:flex;flex-direction:column;align-items:flex-start;min-height:140px;height:100%;position:relative}
+body:not(.is-home) .resource-library .resource:nth-child(6n+1):not([open])>summary,body:not(.is-home) .resource-library .resource:nth-child(6n+4):not([open])>summary{min-height:340px}
+body:not(.is-home) .resource-library .resource[open]>summary{height:auto;min-height:0}
+body:not(.is-home) .resource-library .resource h3{font-size:16px;line-height:1.45;letter-spacing:-.6px;max-width:100%;margin:20px 0 25px;overflow-wrap:anywhere}
+body:not(.is-home) .resource-library .resource:nth-child(6n+1) h3{font-size:clamp(23px,2.3vw,34px);line-height:1.3;letter-spacing:-1.4px;max-width:90%;margin-top:47px}
+body:not(.is-home) .resource-library .resource:nth-child(6n+4) h3{font-size:23px;letter-spacing:-1px;line-height:1.4;margin-top:42px}
+body:not(.is-home) .resource-library .resource-open{margin-top:auto;line-height:1.4;position:relative;z-index:1}
+body:not(.is-home) .resource-library .badge{max-width:calc(100% - 38px);white-space:normal;padding:6px 10px;font-size:8px}
+.resource-number{position:absolute;right:0;top:0;font-family:Unbounded,Arial,sans-serif;font-weight:900;font-size:13px;letter-spacing:-.8px;color:#c0c7d5}
+body:not(.is-home) .resource-library .resource:nth-child(6n+1) h3,body:not(.is-home) .resource-library .resource:nth-child(6n+1) .resource-number{color:white}
+body:not(.is-home) .resource-library .resource:nth-child(6n+1) .badge{background:#2c5ad9;color:#dce7ff}
+body:not(.is-home) .resource-library .resource:nth-child(6n+1) .resource-open{background:#baff00;color:#153c95}
+body:not(.is-home) .resource-library .resource:nth-child(6n+1) ol{color:#d0dfff}
+body:not(.is-home) .resource-library .resource:nth-child(6n+3) .badge{background:#a7e600;color:#3f5b08}
+body:not(.is-home) .resource-library .resource:nth-child(6n+3) .resource-number{color:#7baf00}
+body:not(.is-home) .resource-library .resource:nth-child(6n+3) .resource-open{background:white;color:#163b95}
+body:not(.is-home) .resource-library .resource:nth-child(6n+3) ol{color:#415f0e}
+body:not(.is-home) .resource-library .resource[open] .resource-open{margin-top:0}
+@media(max-width:1100px) and (min-width:601px){body:not(.is-home) .resource-library{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(200px,auto);gap:17px}body:not(.is-home) .resource-library>.resource:nth-child(n){grid-column:span 2}body:not(.is-home) .resource-library>.resource:nth-child(6n+1){grid-column:span 4}body:not(.is-home) .resource-library>.resource:nth-child(6n+1),body:not(.is-home) .resource-library>.resource:nth-child(6n+4){grid-row:span 2}body:not(.is-home) .resource-library>.resource{padding:22px}body:not(.is-home) .resource-library .resource h3{font-size:14px}body:not(.is-home) .resource-library .resource:nth-child(6n+1) h3,body:not(.is-home) .resource-library .resource:nth-child(6n+4) h3{font-size:23px}body:not(.is-home) .resource-library .resource:nth-child(6n+1):not([open])>summary,body:not(.is-home) .resource-library .resource:nth-child(6n+4):not([open])>summary{min-height:370px}}
+@media(max-width:600px){body:not(.is-home) .resource-library{grid-template-columns:1fr;grid-auto-rows:auto;gap:17px}body:not(.is-home) .resource-library>.resource:nth-child(n){grid-column:1;grid-row:auto;width:89%;justify-self:end;padding:23px;border-radius:25px}body:not(.is-home) .resource-library>.resource:nth-child(3n){justify-self:start}body:not(.is-home) .resource-library>.resource:nth-child(6n+1),body:not(.is-home) .resource-library>.resource:nth-child(6n+4){width:100%}body:not(.is-home) .resource-library .resource>summary{min-height:155px}body:not(.is-home) .resource-library .resource:nth-child(6n+1):not([open])>summary,body:not(.is-home) .resource-library .resource:nth-child(6n+4):not([open])>summary{min-height:245px}body:not(.is-home) .resource-library .resource h3{font-size:15px}body:not(.is-home) .resource-library .resource:nth-child(6n+1) h3,body:not(.is-home) .resource-library .resource:nth-child(6n+4) h3{font-size:24px;line-height:1.35;letter-spacing:-1px;margin-top:31px}}
+
+/* Persistent across client-side navigation, with a native smooth return. */
+.back-to-top{position:fixed;right:25px;bottom:25px;z-index:40;display:flex;align-items:center;justify-content:center;gap:9px;min-height:47px;padding:13px 18px;border:1px solid #a5df00;border-radius:30px;background:#baff00;color:#12398e;box-shadow:0 7px 24px #0a2e8526;font-size:10px;font-weight:800;animation:message-arrive .2s ease both}
+.back-to-top[hidden]{display:none}
+.back-to-top svg{width:19px;height:19px}
+.back-to-top:hover{background:#ceff55;transform:translateY(-3px)}
+@media(max-width:760px){.back-to-top{right:17px;bottom:calc(17px + env(safe-area-inset-bottom,0px));width:46px;height:46px;min-height:46px;padding:12px}.back-to-top span{display:none}#toast{bottom:80px}}
+@media(prefers-reduced-motion:reduce){.back-to-top{animation:none;transition:none}}

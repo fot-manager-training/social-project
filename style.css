@@ -306,15 +306,17 @@ body:not(.is-home) .chat{max-height:440px;min-height:240px;padding:17px}
 /* Scroll-led motion uses native scrolling, with no wheel/touch interception. */
 html:has(body.is-home){scroll-behavior:smooth}
 .feature-widgets{scroll-margin-top:20px}
-.scroll-cue{position:absolute;right:22%;bottom:42px;z-index:3;display:flex;align-items:center;gap:13px;color:#c0d6ff;font-size:7px;font-weight:600;letter-spacing:1.5px;padding:10px 12px;border:1px solid #a9c4ff38;border-radius:30px;background:#073dd133}
-.scroll-cue svg{width:19px;height:19px;animation:scroll-nudge 2.5s ease-in-out infinite}
-.scroll-cue:hover{color:#baff00;border-color:#baff0070;background:#0c43ce}
 .scroll-reveal-ready{opacity:0;translate:0 22px;transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms),translate .7s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms)}
 .scroll-reveal-ready.is-revealed,.scroll-reveal-ready:focus-within{opacity:1;translate:0 0}
 .widget-swoosh.draw-ready path{stroke-dasharray:1;stroke-dashoffset:1}
 .widget-swoosh.draw-ready.is-drawn path{stroke-dashoffset:0;transition:stroke-dashoffset 1.25s cubic-bezier(.45,0,.3,1) .12s}
-@keyframes scroll-nudge{0%,100%{translate:0 0}50%{translate:0 4px}}
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.is-home .feature-widget:hover{translate:0 -4px;box-shadow:0 13px 25px #0b2f8209}}
-@media(max-width:1100px) and (min-width:761px){.scroll-cue{right:20%;bottom:33px;font-size:6px;padding:8px 10px}}
-@media(max-width:760px){.scroll-cue{right:50%;transform:translateX(50%);bottom:12px;font-size:6px;padding:7px 11px;border-color:transparent}.scroll-cue svg{width:14px;height:14px}.is-home .hero-bottom{margin-bottom:19px}.scroll-reveal-ready{translate:0 15px}}
-@media(prefers-reduced-motion:reduce){html:has(body.is-home){scroll-behavior:auto}.scroll-reveal-ready{opacity:1!important;translate:none!important;transition:none!important}.widget-swoosh.draw-ready path{stroke-dashoffset:0!important;transition:none!important}.scroll-cue svg{animation:none!important}}
+@media(max-width:760px){.scroll-reveal-ready{translate:0 15px}}
+@media(prefers-reduced-motion:reduce){html:has(body.is-home){scroll-behavior:auto}.scroll-reveal-ready{opacity:1!important;translate:none!important;transition:none!important}.widget-swoosh.draw-ready path{stroke-dashoffset:0!important;transition:none!important}}
+
+/* Revealed cards create stacking contexts. Keep each outgoing arrow above the next card. */
+.feature-widgets{isolation:isolate}
+.feature-widget:nth-child(1){z-index:3}
+.feature-widget:nth-child(2){z-index:2}
+.feature-widget:nth-child(3){z-index:1}
+.widget-swoosh{overflow:visible}

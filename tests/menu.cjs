@@ -2,12 +2,15 @@ const assert = require('node:assert/strict');
 
 module.exports = async function checkMenu(page) {
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.locator('nav').getByRole('button', { name: 'Личный план', exact: true }).click();
   await page.getByRole('button', { name: 'Свернуть меню', exact: true }).click();
   assert.equal(await page.locator('main').evaluate(el => getComputedStyle(el).marginLeft), '80px');
   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'), 'false');
   await page.reload();
   await page.getByRole('button', { name: 'Развернуть меню', exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Развернуть меню', exact: true }).click();
   await page.locator('nav').getByRole('button', { name: 'Моя анкета', exact: true }).click();
+  await page.getByRole('button', { name: 'Свернуть меню', exact: true }).click();
   await page.locator('[name="name"]').fill('Несохранённый текст');
   await page.locator('#menu-toggle').focus();
   await page.keyboard.press('Enter');

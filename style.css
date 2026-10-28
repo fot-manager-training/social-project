@@ -14,3 +14,96 @@
 /* Keep the display headline unobstructed on small screens. */
 @media(max-width:760px){.glass-route{top:204px;width:112px;right:13%}.glass-team{top:252px;width:108px;left:12%}.start-sticker{top:325px}.doodle-scribble{top:252px}}
 @media(min-width:500px) and (max-width:760px){.glass-route{top:228px;width:132px;right:18%}.glass-team{top:277px;width:122px;left:17%}.start-sticker{top:346px}.doodle-scribble{top:280px}}
+
+/* The home page is a single full-bleed editorial canvas, not a dashboard panel. */
+body.is-home{background:#073dd1}
+.is-home main,.is-home.menu-collapsed main{margin:0;padding:0;max-width:none;width:100%}
+.is-home aside,.is-home.menu-collapsed aside{position:absolute;inset:0 0 auto;width:100%;height:auto;min-height:88px;padding:22px 270px 20px 40px;background:#073dd1;display:flex;flex-direction:row;align-items:center;gap:30px;overflow:visible;border:0;z-index:12}
+.is-home .brand,.is-home.menu-collapsed .brand{font-size:24px;gap:9px;justify-content:flex-start;flex-shrink:0}
+.is-home .brand-name,.is-home.menu-collapsed .brand-name{display:inline}
+.is-home .brand svg,.is-home.menu-collapsed .brand svg{width:35px;height:35px}
+.is-home .tagline,.is-home .sidebottom{display:none}
+.is-home nav{display:flex;gap:3px;align-items:center;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1;padding:0}
+.is-home nav::-webkit-scrollbar{display:none}
+.is-home nav button{font-size:9px;padding:10px 12px;white-space:nowrap;gap:0;flex-shrink:0}
+.is-home nav .navicon,.is-home nav button.active:after{display:none}
+.is-home .nav-label{display:inline}
+.is-home .menu-toggle,.is-home.menu-collapsed .menu-toggle{position:absolute;right:35px;top:25px;width:36px;height:36px;min-height:36px;padding:8px;margin:0;justify-content:center}
+.is-home .toggle-label{display:none}
+.is-home.menu-collapsed #sidebar-nav{display:none}
+.is-home header{position:absolute;top:24px;right:92px;z-index:13;border:0;height:38px;width:auto;color:#fff}
+.is-home .breadcrumb,.is-home header .account>span{display:none}
+.is-home .account{gap:10px}
+.is-home .account select{background:transparent;color:#d8e3ff;border-color:#87a7ff65;max-width:144px;font-size:9px}
+.is-home .account option{color:#18346d;background:white}
+.is-home .account .avatar{background:#2054d9;color:white;border-color:#5e83e5;width:33px;height:33px}
+.is-home .intro{display:none}
+.is-home .campaign{border-radius:0;margin:0;box-shadow:none;overflow:visible;background:white}
+.is-home .hero{border:0;border-radius:0;min-height:max(740px,85svh);padding:135px 6vw 53px;width:100%}
+.is-home .hero:before{inset:100px 3vw 25px;background-size:60px 60px;border:0;mask-image:linear-gradient(transparent,#000 15%,#000 80%,transparent)}
+.is-home .hero .eyebrow{font-size:8px;letter-spacing:2px;margin:0}
+.is-home .hero .club-title{font-family:Unbounded,Arial,sans-serif;font-size:clamp(65px,8.4vw,144px);font-weight:900;line-height:1;letter-spacing:-6px;text-align:center;margin:28px 0 0;color:white}
+.is-home .club-title>span{display:block;white-space:nowrap}
+.is-home .hero p{font-size:12px;max-width:400px;margin:35px 0 20px;color:#c5d7ff}
+.is-home .hero .primary{font-size:11px;min-height:47px}
+.is-home .hero-bottom{margin-top:25px;font-size:7px}
+.is-home .doodle-hash{top:165px;left:7%;width:105px;height:115px}
+.is-home .doodle-loop{right:5%;top:155px;width:175px;height:160px}
+.is-home .glass-route{top:24%;right:16%;width:190px}
+.is-home .glass-team{bottom:45px;right:35%;width:167px}
+.is-home .glass-symbol{width:65px;height:65px}
+.is-home .glass-card strong{font-size:12px}
+.is-home .glass-card>span{font-size:7px}
+.is-home .doodle-scribble{bottom:12px;right:44%;width:127px}
+.is-home .start-sticker{bottom:55px;right:7%;width:146px;height:146px}
+.is-home .start-sticker>span{font-size:7px}
+.is-home .start-sticker svg{width:78px;height:58px}
+.is-home .stats{padding:45px 6vw 35px;gap:0;border-radius:45px 45px 0 0;margin-top:-1px;background:#fff}
+.is-home .stat{border:0;border-right:1px solid #e5e8f0;border-radius:0;background:transparent;padding:0 45px;min-height:142px}
+.is-home .stat:first-child{padding-left:0}
+.is-home .stat:last-child{border-right:0}
+.is-home .stat-top{justify-content:flex-start;gap:20px}
+.is-home .stat-top span{font-size:13px}
+.is-home .stat strong{font-size:45px;margin:22px 0 14px}
+.is-home .stat .stat-caption{font-size:10px}
+.is-home .stat:nth-child(2) strong,.is-home .stat:nth-child(3) strong{font-size:31px;margin:16px 0 14px}
+.is-home .progress{max-width:200px}
+.landing-info{background:white;padding:0 6vw 15px}
+.landing-info .demo-notice{margin:0;padding:17px 0;border-bottom:1px solid #e9edf5;color:#8a97ae}
+.landing-info>.notice{margin-top:15px}
+.landing-section{background:#fff;padding:55px 6vw 65px}
+.landing-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;margin-bottom:38px}
+.landing-heading .eyebrow{color:#7f94bd;font-size:8px;letter-spacing:2px;margin-bottom:20px}
+.landing-heading h2{font-size:clamp(32px,3.7vw,57px);letter-spacing:-2.5px;line-height:1.15;font-weight:800}
+.landing-heading .secondary{gap:20px;min-height:45px;padding:13px 20px;font-size:11px}
+.landing-heading .secondary svg{width:16px;height:16px}
+.landing-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #e5e8f0;border-bottom:1px solid #e5e8f0}
+.landing-steps .row{padding:30px 26px;border:0;border-right:1px solid #e5e8f0;align-items:flex-start}
+.landing-steps .row:first-child{padding-left:0}
+.landing-steps .row:last-child{border-right:0}
+.landing-steps .badge{display:none}
+.landing-steps .row strong{font-size:13px}
+.landing-steps .row p{font-size:11px}
+.landing-opportunities{padding-top:35px}
+.is-home .opportunities{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #e5e8f0}
+.is-home .opportunity{border:0;border-radius:0;border-right:1px solid #e5e8f0;padding:30px 26px 0;background:transparent;box-shadow:none}
+.is-home .opportunity:first-child{padding-left:0}
+.is-home .opportunity:last-child{border-right:0;padding-right:0}
+.is-home .opportunity h3{font-size:18px;letter-spacing:-.8px;margin-top:25px}
+.is-home .opportunity p{font-size:11px}
+.is-home .opportunity .secondary{margin-top:20px;font-size:10px}
+.landing-support{background:#082878;padding:65px 6vw 75px;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;color:white}
+.landing-support .eyebrow{color:#93b4ff;font-size:8px;letter-spacing:2px;margin-bottom:26px}
+.landing-support h2{font-size:clamp(36px,4.2vw,66px);font-weight:800;line-height:1.1;letter-spacing:-3px}
+.landing-support h2 em{color:#baff00;font-style:normal}
+.landing-support-copy{align-self:end;max-width:450px}
+.landing-support-copy>p{font-size:13px;color:#b9ccf7;line-height:1.9;margin:0 0 26px}
+.landing-support .primary{background:#baff00;color:#092d82}
+.landing-support .secondary{color:white;border-color:#6e8fd080;background:transparent}
+.landing-support button svg{width:16px;height:16px}
+.is-home .footer{margin:0;padding:25px 6vw;border:0;background:#061e61;color:#7e9bd7}
+@media(min-width:1800px){.is-home .hero{padding-top:155px}.is-home .hero .club-title{font-size:145px}.is-home .glass-route{width:225px}.is-home .glass-team{width:200px}}
+@media(max-width:1250px){.is-home aside,.is-home.menu-collapsed aside{padding-left:28px;gap:20px}.is-home .brand{font-size:21px}.is-home nav button{font-size:8px;padding:9px 10px}.is-home .hero{min-height:760px;padding-top:140px}.is-home .hero .club-title{font-size:8.5vw;letter-spacing:-5px}.is-home .glass-route{width:166px;right:14%;top:25%}.is-home .glass-team{width:145px;right:31%;bottom:50px}.is-home .start-sticker{width:123px;height:123px;right:6%;bottom:65px}.is-home .start-sticker>span{font-size:6px}.is-home .doodle-hash{width:85px;left:5%;top:170px}.is-home .doodle-loop{width:143px;right:3%;top:160px}.is-home .doodle-scribble{width:104px;right:40%}.is-home .hero p{max-width:340px;font-size:11px}.is-home .stat{padding:0 30px}.is-home .stat-top span{font-size:11px}.is-home .opportunities{grid-template-columns:repeat(2,minmax(0,1fr))}.is-home .opportunity:nth-child(2n){border-right:0;padding-right:0;padding-left:25px}.is-home .opportunity:nth-child(2n+1){padding-left:0;padding-right:25px}.is-home .opportunity:nth-child(n+3){border-top:1px solid #e5e8f0;margin-top:30px;padding-top:30px}}
+@media(max-width:1100px){.is-home aside,.is-home.menu-collapsed aside{display:grid;grid-template-columns:auto 1fr;padding:21px 270px 10px 25px;gap:15px}.is-home #sidebar-nav{grid-column:1/-1;width:calc(100vw - 50px);padding-bottom:8px}.is-home nav button{font-size:10px;padding:10px 14px}.is-home .hero{padding-top:180px;min-height:800px}.is-home .hero .club-title{font-size:8.5vw}.is-home .glass-route{top:30%;right:12%;width:150px}.is-home .glass-team{right:28%;width:135px}.is-home .glass-symbol{width:55px;height:55px}.is-home .glass-card strong{font-size:10px}.is-home .glass-card>span{font-size:6px}.is-home .doodle-hash{top:215px;width:75px}.is-home .doodle-loop{top:205px;width:125px}.is-home .hero p{margin-top:50px;max-width:300px}.is-home .stat-top span{font-size:10px}.is-home .stat .stat-caption{font-size:9px}.landing-support{gap:35px}.landing-support-copy>p{font-size:12px}.landing-steps .row{padding:25px 18px}.landing-steps .row strong{font-size:12px}.landing-steps .row p{font-size:10px}}
+@media(max-width:760px){.is-home aside,.is-home.menu-collapsed aside{padding:20px 15px 10px;display:block;min-height:74px}.is-home .brand,.is-home.menu-collapsed .brand{font-size:19px;gap:7px}.is-home .brand svg,.is-home.menu-collapsed .brand svg{width:29px;height:29px}.is-home .menu-toggle,.is-home.menu-collapsed .menu-toggle{right:15px;top:18px;width:31px;height:31px;min-height:31px}.is-home .account .avatar{display:none}.is-home header{right:56px;top:17px;height:33px}.is-home .account select{font-size:8px;padding:7px 8px;max-width:119px}.is-home #sidebar-nav{width:100%;margin-top:18px;padding:0 0 4px}.is-home nav button{font-size:9px;padding:9px 12px}.is-home .hero{min-height:760px;padding:153px 6vw 38px}.is-home .hero:before{inset:125px 15px 20px;background-size:35px 35px}.is-home .hero .eyebrow{font-size:6px;letter-spacing:1.1px}.is-home .hero .club-title{font-size:8vw;letter-spacing:-1.8px;line-height:1.08;margin-top:25px}.is-home .hero p{max-width:none;font-size:11px;line-height:1.9;text-align:center;margin:245px 0 20px}.is-home .hero .primary{width:100%;font-size:11px;min-height:48px}.is-home .hero-bottom{font-size:5px;justify-content:center;gap:15px;margin-top:23px}.is-home .glass-route{top:305px;right:13%;width:116px;bottom:auto}.is-home .glass-team{top:360px;left:12%;right:auto;bottom:auto;width:110px}.is-home .glass-symbol{width:47px;height:47px}.is-home .glass-card strong{font-size:9px}.is-home .glass-card>span{font-size:5px}.is-home .doodle-hash{top:177px;left:3%;width:45px;height:60px}.is-home .doodle-loop{top:194px;right:1%;width:87px;height:89px}.is-home .doodle-scribble{top:365px;left:2%;right:auto;bottom:auto;width:76px}.is-home .start-sticker{top:443px;right:5%;bottom:auto;width:91px;height:91px}.is-home .start-sticker>span{font-size:4px}.is-home .start-sticker svg{width:48px;height:34px}.is-home .stats{padding:28px 6vw;gap:0;border-radius:30px 30px 0 0}.is-home .stat{padding:0 12px;min-height:122px}.is-home .stat:first-child{padding-left:0}.is-home .stat:last-child{padding-right:0}.is-home .stat-top span{font-size:6px;letter-spacing:-.3px}.is-home .stat-top svg{display:none}.is-home .stat strong{font-size:33px;margin:19px 0 12px}.is-home .stat small{font-size:10px}.is-home .stat:nth-child(2) strong,.is-home .stat:nth-child(3) strong{font-size:23px;padding:8px 12px;margin:13px 0 11px}.is-home .stat .stat-caption{font-size:6px;line-height:1.8}.landing-info{padding:0 6vw 6px}.landing-info .demo-notice{font-size:8px}.landing-section{padding:37px 6vw 43px}.landing-heading{align-items:flex-start;gap:15px;flex-direction:column;margin-bottom:25px}.landing-heading h2{font-size:34px;letter-spacing:-1.8px}.landing-heading .eyebrow{font-size:6px;letter-spacing:1.3px;margin-bottom:15px}.landing-heading .secondary{font-size:10px;min-height:38px;padding:10px 15px}.landing-steps{grid-template-columns:1fr}.landing-steps .row,.landing-steps .row:first-child,.landing-steps .row:last-child{border:0;border-bottom:1px solid #e5e8f0;padding:23px 0}.landing-steps .row:last-child{border-bottom:0}.landing-steps .row strong{font-size:12px}.landing-steps .row p{font-size:10px}.landing-opportunities{padding-top:15px}.is-home .opportunities{grid-template-columns:1fr}.is-home .opportunity,.is-home .opportunity:nth-child(n){border:0;border-bottom:1px solid #e5e8f0;padding:28px 0;margin:0}.is-home .opportunity:last-child{border-bottom:0;padding-bottom:0}.is-home .opportunity h3{font-size:20px;letter-spacing:-.7px;margin-top:20px}.is-home .opportunity .secondary{width:auto;min-width:180px}.landing-support{grid-template-columns:1fr;padding:46px 6vw 49px;gap:30px}.landing-support h2{font-size:43px;letter-spacing:-2.3px}.landing-support .eyebrow{font-size:6px;letter-spacing:1.5px;margin-bottom:20px}.landing-support-copy>p{font-size:12px;margin:0}.landing-support-copy .formactions{gap:10px}.landing-support .primary,.landing-support .secondary{font-size:10px;padding:12px 16px;gap:12px}.is-home .footer{font-size:7px;padding:24px 6vw}}
+@media(min-width:500px) and (max-width:760px){.is-home .hero{min-height:830px}.is-home .glass-route{top:344px;right:20%;width:143px}.is-home .glass-team{top:400px;left:18%;width:130px}.is-home .hero p{margin-top:251px}.is-home .start-sticker{top:485px;right:12%;width:102px;height:102px}.is-home .doodle-scribble{top:406px;left:7%}.is-home .stat-top span{font-size:8px}}

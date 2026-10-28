@@ -6,7 +6,7 @@ module.exports = async function checkMenu(page) {
   await page.getByRole('button', { name: 'Свернуть меню', exact: true }).click();
   assert.equal(await page.locator('main').evaluate(el => getComputedStyle(el).marginLeft), '0px');
   await page.evaluate(() => window.scrollTo(0, 500));
-  assert.equal(await page.locator('.global-navigation').evaluate(el => Math.round(el.getBoundingClientRect().top)), 0);
+  assert.ok(await page.locator('.global-navigation').evaluate(el => el.getBoundingClientRect().bottom <= 0));
   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'), 'false');
   await page.reload();
   await page.getByRole('button', { name: 'Развернуть меню', exact: true }).waitFor();

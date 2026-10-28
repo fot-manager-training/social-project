@@ -7,7 +7,7 @@ module.exports = async function checkSelects(browser, baseURL) {
     await page.locator(`nav [data-page="${screen}"]`).click();
     assert.equal(await page.locator('main').evaluate(el => el.getBoundingClientRect().left), 0);
     await page.evaluate(() => window.scrollTo({ top: 450, behavior: 'instant' }));
-    assert.equal(await page.locator('.global-navigation').evaluate(el => el.getBoundingClientRect().top), 0);
+    assert.ok(await page.locator('.global-navigation').evaluate(el => el.getBoundingClientRect().bottom <= 0));
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   }
   const interest = page.getByRole('combobox', { name: 'Что тебе интересно', exact: true });
@@ -43,5 +43,5 @@ module.exports = async function checkSelects(browser, baseURL) {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   }
   await context.close();
-  console.log('PASS: shared fixed header, dropdown mouse/keyboard, saved form values, filters, staff role, popup bounds');
+  console.log('PASS: shared scrolling header, dropdown mouse/keyboard, saved form values, filters, staff role, popup bounds');
 };

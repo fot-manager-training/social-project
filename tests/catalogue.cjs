@@ -13,7 +13,7 @@ module.exports = async function checkCatalogue(browser, baseURL) {
   await page.locator('#catalogue-reset').click();
   await page.locator('[data-filter="Работа"]').click();
   assert.equal(await page.locator('#catalogue-list article').count(),10);
-  await page.locator('#catalogue-city').selectOption('Онлайн');
+  await require('./choose.cjs')(page,'#catalogue-city','Онлайн');
   assert.equal(await page.locator('#catalogue-list article').count(),3);
   await page.locator('#catalogue-reset').click();
   await page.locator('[data-apply="8"]').click();
@@ -41,10 +41,10 @@ module.exports = async function checkCatalogue(browser, baseURL) {
   assert.equal(await page.locator('.resource').count(),12);
   await page.locator('.resource').first().locator('summary').click();
   assert.equal(await page.locator('.resource').first().locator('li').count(),3);
-  await page.locator('#role').selectOption('Координатор');
+  await require('./choose.cjs')(page,'#role','Координатор');
   assert.equal(await page.locator('[data-request]').count(),0); // Examples never become personal requests.
   await page.getByRole('heading',{name:'Примеры ситуаций в очереди'}).waitFor();
-  await page.locator('#role').selectOption('Куратор');
+  await require('./choose.cjs')(page,'#role','Куратор');
   await page.getByRole('heading',{name:'Примеры маршрутов участников'}).waitFor();
   await page.setViewportSize({width:390,height:844});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);

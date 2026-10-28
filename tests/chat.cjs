@@ -1,0 +1,54 @@
+const assert = require('node:assert/strict');
+module.exports = async function checkChat(browser, baseURL) {
+  const context=await browser.newContext();
+  const page=await context.newPage();
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(baseURL);
+  assert.equal(await page.locator('.demo-notice').count(),0);
+  assert.equal(await page.getByText('СОПУТНИК / МОСТ В БУДУЩЕЕ',{exact:true}).count(),0);
+  const navigate=name=>page.locator('nav').getByRole('button',{name,exact:true}).click();
+  for(const name of ['Мост в будущее','Учёба и работа','Мои наставники','Помощь сейчас','Моя анкета']){
+    await navigate(name);
+    assert.equal(await page.locator('.demo-notice').count(),0);
+    const text=await page.locator('main').innerText();
+    for(const removed of ['Данные хранятся только в этом браузере','Это первый ориентир','Сейчас подбор работает','учебных примеров: курсы','вымышленных наставников и экспертов','Локальный помощник по готовым сценариям'])assert.equal(text.includes(removed),false);
+  }
+  await navigate('Помощь сейчас');
+  const input=page.locator('#chatform input');
+  const composer=await input.elementHandle();
+  await input.fill('<img src=x onerror=alert(1)>');
+  await page.locator('#chatform button').click();
+  await page.locator('.chat-typing').waitFor();
+  assert.equal(await input.inputValue(),'');
+  assert.equal(await page.locator('#chatform button').isDisabled(),true);
+  assert.equal(await page.locator('.chat img').count(),0);
+  await input.fill('Черновик следующего сообщения');
+  await page.locator('#requestform textarea').fill('Несохранённый текст обращения');
+  await page.locator('.chat-typing').waitFor({state:'hidden'});
+  assert.equal(await composer.evaluate(el=>el===document.querySelector('#chatform input')),true);
+  assert.equal(await input.inputValue(),'Черновик следующего сообщения');
+  assert.equal(await page.locator('#requestform textarea').inputValue(),'Несохранённый текст обращения');
+  assert.equal(await page.locator('#chatform button').isDisabled(),false);
+  await input.fill('Документы');
+  await input.press('Enter');
+  await page.locator('.chat-typing').waitFor();
+  await page.reload();
+  await navigate('Помощь сейчас');
+  await page.getByText(/Составь список недостающих документов/).waitFor();
+  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('soputnik-v1')).chat);
+  assert.equal(saved.length,4);
+  assert.deepEqual(saved.map(m=>m.user),[true,false,true,false]);
+  // A response may finish after navigation without modifying an unrelated screen.
+  await input.fill('Тревожно');await input.press('Enter');
+  await navigate('Личный план');
+  await page.locator('#goalform input').fill('Черновик цели');
+  await page.waitForFunction(()=>JSON.parse(localStorage.getItem('soputnik-v1')).chat.length===6);
+  assert.equal(await page.locator('#goalform input').inputValue(),'Черновик цели');
+  await navigate('Помощь сейчас');
+  await page.getByText(/пять предметов/).waitFor();
+  await page.emulateMedia({reducedMotion:'reduce'});
+  assert.equal(await page.locator('.chat').evaluate(el=>getComputedStyle(el).scrollBehavior),'auto');
+  assert.deepEqual(errors,[]);
+  await context.close();
+  console.log('PASS: requested copy removal, typing state, safe message rendering, stable composer, drafts, reload recovery and navigation during reply');
+};

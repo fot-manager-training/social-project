@@ -3,7 +3,7 @@ module.exports = async function checkCatalogue(browser, baseURL) {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(baseURL);
-  const navigate = name => page.locator('nav').getByRole('button', {name, exact:true}).click();
+  const navigate = name => require('./navigate.cjs')(page, name);
   await navigate('Учёба и работа');
   assert.equal(await page.locator('#catalogue-list article').count(),30);
   await page.locator('#catalogue-search').fill('тестир');

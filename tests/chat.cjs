@@ -6,7 +6,7 @@ module.exports = async function checkChat(browser, baseURL) {
   await page.goto(baseURL);
   assert.equal(await page.locator('.demo-notice').count(),0);
   assert.equal(await page.getByText('СОПУТНИК / МОСТ В БУДУЩЕЕ',{exact:true}).count(),0);
-  const navigate=name=>page.locator('nav').getByRole('button',{name,exact:true}).click();
+  const navigate = name => require('./navigate.cjs')(page, name);
   for(const name of ['Мост в будущее','Учёба и работа','Мои наставники','Помощь сейчас','Моя анкета']){
     await navigate(name);
     assert.equal(await page.locator('.demo-notice').count(),0);

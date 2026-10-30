@@ -4,6 +4,7 @@ module.exports = async function checkSelects(browser, baseURL) {
   const page = await context.newPage();
   await page.goto(baseURL);
   for (const screen of ['home', 'bridge', 'plan', 'jobs', 'mentors', 'help', 'profile']) {
+    await page.locator('#menu-toggle').click();
     await page.locator(`nav [data-page="${screen}"]`).click();
     assert.equal(await page.locator('main').evaluate(el => el.getBoundingClientRect().left), 0);
     await page.evaluate(() => window.scrollTo({ top: 450, behavior: 'instant' }));
@@ -16,14 +17,14 @@ module.exports = async function checkSelects(browser, baseURL) {
   assert.equal(await page.locator('select[name=interest]').inputValue(), 'Творчество и дизайн');
   await page.getByRole('button', { name: 'Сохранить анкету', exact: true }).click();
   await page.reload();
-  await page.locator('nav [data-page="profile"]').click();
+  await require('./navigate.cjs')(page, 'Моя анкета');
   assert.equal(await page.locator('select[name=interest]').inputValue(), 'Творчество и дизайн');
   await page.getByRole('combobox', { name: 'Что тебе интересно', exact: true }).click();
   await page.keyboard.press('Home');
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Enter');
   assert.equal(await page.locator('select[name=interest]').inputValue(), 'Творчество и дизайн');
-  await page.locator('nav [data-page="jobs"]').click();
+  await require('./navigate.cjs')(page, 'Учёба и работа');
   const city = page.locator('#catalogue-city').locator('..').getByRole('combobox');
   await city.click();
   await page.getByRole('option', { name: 'Онлайн', exact: true }).click();
@@ -33,7 +34,7 @@ module.exports = async function checkSelects(browser, baseURL) {
   assert.equal(await page.locator('.select-popup').count(), 0);
   await page.getByRole('combobox', { name: 'Демонстрационная роль' }).click();
   await page.getByRole('option', { name: 'Координатор', exact: true }).click();
-  await page.locator('nav [data-page="workspace"][aria-current="page"]').waitFor();
+  assert.equal(await page.locator('nav [data-page="workspace"]').getAttribute('aria-current'), 'page');
   for (const width of [360, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.getByRole('combobox', { name: 'Демонстрационная роль' }).click();
